@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Joystix';
+  src: url('fonts/JoystixMonospace-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+.square {
+  border-style: border-box;
+  float: left;
+  width: 40px;
+  height: 30px;
+  margin: 20px;
+  background-color: #dd11ee;
+  color: #DDD;
+  font-family: 'Joystix', monospace;
+  font-size: 40px;
+  padding-left: 5px;
+  padding-bottom: 15px;
+  border-left: 5px solid #dd11ee;
+  border-bottom: 5px solid #dd11ee;
+}
+#gameboard {
+  background-color: rgb(196, 126, 36);
+  width: 230px;
+  height: 230px;
+}
+#top-middle, #bottom-middle {
+  margin-left:0px;
+  margin-right: 0px;
+}
+#middle-left, #middle-right {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#middle-middle {
+  margin: 0px;
+}
