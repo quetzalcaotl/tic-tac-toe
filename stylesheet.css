@@ -10,17 +10,17 @@
   width: 40px;
   height: 30px;
   margin: 20px;
-  background-color: #dd11ee;
-  color: #DDD;
+  background-color: #DDD;
+  color: #805A46;
   font-family: 'Joystix', monospace;
   font-size: 40px;
   padding-left: 5px;
   padding-bottom: 15px;
-  border-left: 5px solid #dd11ee;
-  border-bottom: 5px solid #dd11ee;
+  border-left: 5px solid #DDD;
+  border-bottom: 5px solid #DDD;
 }
 #gameboard {
-  background-color: rgb(196, 126, 36);
+  background-color: #0B6623;
   width: 230px;
   height: 230px;
 }
