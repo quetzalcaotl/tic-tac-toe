@@ -1,10 +1,10 @@
 ///////////////////////////////////
 // Create gameboard and checkers //
 ///////////////////////////////////
-var gameboard = 
-  [['','',''],
-   ['','',''],
-   ['','','']];
+var gameboard =
+  [['', '', ''],
+  ['', '', ''],
+  ['', '', '']];
 var movesLeft = 9;
 
 var checkRow = (gb, row) => {
@@ -66,31 +66,31 @@ var checkBoard = () => {
 ////////////////////////////////////////////////////////////////////
 var assignMarker = (id, mark) => {
   switch (id) {
-    case 'top-left': 
+    case 'top-left':
       gameboard[0][0] = mark;
       break;
-    case 'top-middle': 
+    case 'top-middle':
       gameboard[0][1] = mark;
       break;
-    case 'top-right': 
+    case 'top-right':
       gameboard[0][2] = mark;
       break;
-    case 'middle-left': 
+    case 'middle-left':
       gameboard[1][0] = mark;
       break;
-    case 'middle-middle': 
+    case 'middle-middle':
       gameboard[1][1] = mark;
       break;
-    case 'middle-right': 
+    case 'middle-right':
       gameboard[1][2] = mark;
       break;
-    case 'bottom-left': 
+    case 'bottom-left':
       gameboard[2][0] = mark;
       break;
-    case 'bottom-middle': 
+    case 'bottom-middle':
       gameboard[2][1] = mark;
       break;
-    case 'bottom-right': 
+    case 'bottom-right':
       gameboard[2][2] = mark;
       break;
     default:
@@ -131,7 +131,7 @@ var assignWinner = (tile) => {
 var movesAnimation = moves => {
   // fade out
   document.getElementById('moves-left').animate(
-    [{ opacity: 1}, { opacity: 0}],
+    [{ opacity: 1 }, { opacity: 0 }],
     { duration: 1000, fill: "forwards" });
 
   if (moves === 0) {
@@ -142,22 +142,33 @@ var movesAnimation = moves => {
 
   // fade in
   document.getElementById('moves-left').animate(
-    [{ opacity: 0}, { opacity: 1}],
+    [{ opacity: 0 }, { opacity: 1 }],
     { duration: 1000, fill: "forwards" });
 };
+
+///////////////////////////////////////////////////////
+// Create animation for assigning marks to the board //
+///////////////////////////////////////////////////////
+var boardAnimation = (tile, currentPlayer) => {
+  assignMarker(tile, currentPlayer);
+  document.getElementById(tile).animate([
+    { opacity: 0 }, { opacity: 1 }],
+    { duration: 1000, fill: "forwards" });
+}
 
 ///////////////////////////////////////////
 // Create Click Event Listeners/Handlers //
 ///////////////////////////////////////////
 var $elements = document.getElementsByClassName('square');
 
-for(var i = 0; i < $elements.length; i++){
-  $elements[i].addEventListener('click', function(e){
+for (var i = 0; i < $elements.length; i++) {
+  $elements[i].addEventListener('click', function (e) {
     if (!e.target.innerHTML && movesLeft !== 0) {
       var currentPlayer = JSON.parse(document.getElementById('current-player').innerHTML.slice(-3)).toLowerCase();
       e.target.innerHTML = currentPlayer;
-      var tile = e.target.id;
-      assignMarker(tile, currentPlayer);
+      boardAnimation(e.target.id, currentPlayer);
+      // var tile = e.target.id;
+      // assignMarker(tile, currentPlayer);
       var nextPlayer = (currentPlayer === 'x' ? 'O' : 'X');
       document.getElementById('current-player').innerHTML = `The board is awaiting an "${nextPlayer}"`;
       movesLeft--;
@@ -186,7 +197,7 @@ document.getElementById('button').addEventListener('click', (e) => {
   for (var tile = 0; tile < coll.length; tile++) {
     coll[tile].innerHTML = '';
   }
-  gameboard = [['','',''],['','',''],['','','']];
+  gameboard = [['', '', ''], ['', '', ''], ['', '', '']];
   document.getElementById('subtitle').innerHTML = 'Select a tile to play the game';
   document.getElementById('current-player').innerHTML = 'The board is awaiting an "X"';
   movesLeft = 9;
