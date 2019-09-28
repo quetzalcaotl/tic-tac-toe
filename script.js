@@ -125,6 +125,27 @@ var assignWinner = (tile) => {
   }
 };
 
+//////////////////////////////////////////////////////
+// Create animation for changing moves left element //
+//////////////////////////////////////////////////////
+var movesAnimation = moves => {
+  // fade out
+  document.getElementById('moves-left').animate(
+    [{ opacity: 1}, { opacity: 0}],
+    { duration: 1000, fill: "forwards" });
+
+  if (moves === 0) {
+    document.getElementById('moves-left').innerHTML = 'There are no more moves left! <br> Game Complete!';
+  } else {
+    document.getElementById('moves-left').innerHTML = `There are ${moves} moves left!`;
+  }
+
+  // fade in
+  document.getElementById('moves-left').animate(
+    [{ opacity: 0}, { opacity: 1}],
+    { duration: 1000, fill: "forwards" });
+};
+
 ///////////////////////////////////////////
 // Create Click Event Listeners/Handlers //
 ///////////////////////////////////////////
@@ -141,17 +162,21 @@ for(var i = 0; i < $elements.length; i++){
       document.getElementById('current-player').innerHTML = `The board is awaiting an "${nextPlayer}"`;
       movesLeft--;
       if (movesLeft === 0 || checkBoard()) {
+        // make a winner
         if (checkBoard()) {
           document.getElementById('current-player').innerHTML = assignWinner(checkBoard());
         }
+        // make a cat
         if (movesLeft === 0 && !checkBoard()) {
           document.getElementById('current-player').innerHTML = assignWinner(checkBoard());
         }
         movesLeft = 0;
         document.getElementById('subtitle').innerHTML = 'Press the button above to clear the board!'
-        document.getElementById('moves-left').innerHTML = 'There are no more moves left! <br> Game Complete!';
+        // document.getElementById('moves-left').innerHTML = 'There are no more moves left! <br> Game Complete!';
+        movesAnimation(movesLeft);
       }
-      document.getElementById('moves-left').innerHTML = `There are ${movesLeft} moves left!`;
+      // document.getElementById('moves-left').innerHTML = `There are ${movesLeft} moves left!`;
+      movesAnimation(movesLeft);
     };
   });
 }
